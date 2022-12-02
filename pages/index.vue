@@ -1,23 +1,30 @@
 <template>
   <div>
-
-    <h1>Data fetched using asyncData</h1>
+    <h1>Hello Nuxters! 👋</h1>
+    <p>
+      This page is rendered on the <strong>{{ rendering }}</strong>
+    </p>
+    <p v-if="rendering === 'server'">
+      First load or hard refresh is done on server side.
+    </p>
+    <p v-if="rendering === 'client'">Navigation is done on client side.</p>
     <ul>
-      <li v-for="mountain in mountains" :key="mountain.title">
-        <NuxtLink
-          :to="{ name: 'mountains-slug', params: { slug: mountain.slug } }"
-        >
-          {{ mountain.title }}
-        </NuxtLink>
-      </li>
+      <li>Refresh the page for server side rendering.</li>
+      <li>Click the links to see client side rendering.</li>
     </ul>
+
+    <NuxtLink to="/about">About Page</NuxtLink>
   </div>
 </template>
 <script>
+import comments from '../data';
+console.log(comments)
+
 export default {
-  async asyncData({ $http }) {
-    const mountains = await $http.$get('https://api.nuxtjs.dev/mountains')
-    return { mountains }
+  asyncData() {
+    return {
+      rendering: process.server ? 'server' : 'client'
+    }
   }
 }
 </script>
