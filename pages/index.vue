@@ -13,18 +13,22 @@
       <li>Click the links to see client side rendering.</li>
     </ul>
 
-    <NuxtLink to="/about">About Page</NuxtLink>
+    <NuxtLink to="/add">글쓰러가기</NuxtLink>
   </div>
 </template>
 <script>
-import comments from '../data';
-console.log(comments)
+import data from '../data';
+console.log(data)
 
 export default {
   asyncData() {
     return {
       rendering: process.server ? 'server' : 'client'
     }
-  }
+  },
+
+  mounted() {
+    console.log('state ', this.$store.state.data);
+  },
 }
 </script>

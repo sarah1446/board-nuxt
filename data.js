@@ -1,4 +1,4 @@
-const comments = [];
+const data = [];
 
 const post1 = {
   post: {
@@ -69,8 +69,8 @@ const post2 = {
   ]
 }
 
-comments.push(post1);
-comments.push(post2);
+data.push(post1);
+data.push(post2);
 
-export default comments;
+export default data;
 
