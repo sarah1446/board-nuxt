@@ -22,12 +22,12 @@ export default {
 
   methods: {
     savePost() {  
-      const newDate = new Date();
+      const newDate = new Date(); // 오리지널값도 넘겨서 가지고 있기
       const month = newDate.getMonth();
       const date = newDate.getDate();
 
       const postInfo =  {
-        id: new Date().getTime(),
+        id: newDate.getTime(),
         title: this.title,
         content: this.content,
         author: 'sarah',

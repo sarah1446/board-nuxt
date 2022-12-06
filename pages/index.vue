@@ -1,34 +1,39 @@
 <template>
   <div>
-    <h1>Hello Nuxters! 👋</h1>
-    <p>
-      This page is rendered on the <strong>{{ rendering }}</strong>
-    </p>
-    <p v-if="rendering === 'server'">
-      First load or hard refresh is done on server side.
-    </p>
-    <p v-if="rendering === 'client'">Navigation is done on client side.</p>
-    <ul>
-      <li>Refresh the page for server side rendering.</li>
-      <li>Click the links to see client side rendering.</li>
-    </ul>
-
-    <NuxtLink to="/add">글쓰러가기</NuxtLink>
+    <table>
+      <thead>
+        <tr>
+          <th>idx</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(post, index) in posts" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.author }}</td>
+          <td>{{ post.createdAt }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <NuxtLink to="/add">글쓰러가기</NuxtLink>
+    </div>
   </div>
 </template>
 <script>
-import data from '../data';
-console.log(data)
+import { mapGetters } from 'vuex';
 
 export default {
-  asyncData() {
-    return {
-      rendering: process.server ? 'server' : 'client'
-    }
+  data() {
+    return {}
   },
-
-  mounted() {
-    console.log('state ', this.$store.state.data);
-  },
+  computed: {
+    ...mapGetters({
+      posts: 'getData'
+    })
+  }
 }
 </script>

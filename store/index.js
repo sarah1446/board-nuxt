@@ -7,3 +7,13 @@ export const mutations = {
     state.data.push(obj)
   }
 }
+
+export const actions = {
+
+}
+
+export const getters = {
+  getData(state) {
+    return state.data;
+  }
+}
