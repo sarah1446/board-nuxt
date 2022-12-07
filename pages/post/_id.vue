@@ -4,6 +4,9 @@
     {{ post.author }}
     {{ post.createdAt }}
     {{ post.content }}
+
+    <button @click="onClickModifyButton">수정</button>
+    <button @click="onClickDeleteButton">삭제</button>
   </div>
 </template>
 <script>
@@ -11,7 +14,17 @@ import { mapGetters } from 'vuex';
 
 export default {
   data() {
-    return {}
+    return {
+    }
+  },
+  methods: {
+    onClickModifyButton() {
+      // this.$router.push({name: 'modify'});
+    },
+    onClickDeleteButton() {
+      this.$store.dispatch('deletePost', this.$route.params.id);
+      this.$router.push({name: 'index'})
+    }
   },
   computed: {
     ...mapGetters({
@@ -22,8 +35,9 @@ export default {
   created() {
     this.$store.dispatch('getPostDetail', this.$route.params.id)
   },
-  mounted() {
+  mounted() { 
     // console.log(post); //왜 mounted인데 값이 선언이 안됐다고 나올까
-  }
+  },
+  
 }
 </script>

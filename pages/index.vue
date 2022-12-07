@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table>
+    <table style="margin:0 auto">
       <thead>
         <tr>
           <th>idx</th>

@@ -8,6 +8,11 @@ export const actions = {
     const post = state.data && state.data.filter(post => post.id === Number(id));
     
     commit('setPostDetail', ...post)
+  },
+  deletePost({commit, state}, id) {
+    const posts = state.data.filter(post => post.id !== Number(id))
+
+    commit('setData', posts);
   }
 }
 
@@ -17,6 +22,9 @@ export const mutations = {
   },
   setPostDetail(state, post){
     state.postDetail = post;
+  },
+  setData(state,obj) {
+    state.data = obj;
   }
 }
 

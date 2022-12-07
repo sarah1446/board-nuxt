@@ -18,7 +18,7 @@ export default {
 
   methods: {
     savePost() {  
-      const newDate = new Date(); // 오리지널값도 넘겨서 가지고 있기
+      const newDate = new Date(); // TODO: 오리지널값도 넘겨서 가지고 있기
       const month = newDate.getMonth();
       const date = newDate.getDate();
 
