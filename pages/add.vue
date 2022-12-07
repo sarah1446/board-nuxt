@@ -16,10 +16,6 @@ export default {
     }
   },
 
-  beforeDestroy() {
-    console.log('state ', this.$store.state.data);
-  },
-
   methods: {
     savePost() {  
       const newDate = new Date(); // 오리지널값도 넘겨서 가지고 있기
