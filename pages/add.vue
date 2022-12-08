@@ -33,6 +33,7 @@ export default {
 
       // TODO action
       this.$store.commit('setAddPost', postInfo)
+      this.$router.push('/')
     }
   }
 }
