@@ -16,9 +16,10 @@ export const actions = {
   },
   updatePost({commit, state}, obj) {
     const idx = state.data.findIndex(post => post.id === Number(obj[0]));
-    state.data.splice(idx, 1, obj[1]);
+    const newState = [...state.data];
+    newState.splice(idx, 1, obj[1]);
 
-    commit('setData', state.data);
+    commit('setData', newState);
   }
 }
 

@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     getPostDetail() {
-      Object.assign( this.notice, this.$store.getters.getPostDetail )
+      this.notice = {...this.post};
     },
     routeToIndex() {
       this.$router.push('/')
@@ -41,8 +41,5 @@ export default {
       post: 'getPostDetail'
     }),
   },
-  mounted(){
-   
-  }
 }
 </script>
