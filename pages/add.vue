@@ -31,6 +31,7 @@ export default {
         updatedAt: null,
       }
 
+      // TODO action
       this.$store.commit('setAddPost', postInfo)
     }
   }

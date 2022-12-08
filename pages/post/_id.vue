@@ -9,6 +9,7 @@
     <button @click="onClickDeleteButton">삭제</button>
   </div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 
@@ -19,7 +20,13 @@ export default {
   },
   methods: {
     onClickModifyButton() {
-      // this.$router.push({name: 'modify'});
+      this.$router.push({
+        name: 'update',
+        // 넘겨줘야 수정페이지에서 id값 나옴
+        params: {
+          id: this.$route.params.id, 
+        }
+      });
     },
     onClickDeleteButton() {
       this.$store.dispatch('deletePost', this.$route.params.id);
