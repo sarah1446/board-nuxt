@@ -31,8 +31,7 @@ export default {
         updatedAt: null,
       }
 
-      // TODO action
-      this.$store.commit('setAddPost', postInfo)
+      this.$store.dispatch('setAddPost', postInfo);
       this.$router.push('/')
     }
   }

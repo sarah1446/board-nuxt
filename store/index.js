@@ -4,6 +4,9 @@ export const state = () => ({
 })
 
 export const actions = {
+  setAddPost({commit}, post) {
+    commit('setAddPost', post)
+  },
   getPostDetail({ commit, state }, id) {
     const post = state.data && state.data.filter(post => post.id === Number(id));
     

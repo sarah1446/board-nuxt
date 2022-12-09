@@ -12,7 +12,6 @@ export default {
     const postData = JSON.parse(localStorage.getItem('postData'));
 
     if(postData) {
-      console.log('postData 있음', postData)
       this.$store.dispatch('setData', postData)
     }
   },
