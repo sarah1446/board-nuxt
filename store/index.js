@@ -20,18 +20,30 @@ export const actions = {
     newState.splice(idx, 1, obj[1]);
 
     commit('setData', newState);
+  },
+  setData({commit}, obj) {
+    commit('setData', obj)
   }
 }
 
 export const mutations = {
   setAddPost(state, obj) {
-    state.data.push(obj)
+    state.data.push(obj);
+
+    const stateJson = JSON.stringify(state.data);
+    localStorage.setItem('postData', stateJson);
   },
-  setPostDetail(state, post){
+  setPostDetail(state, post) {
     state.postDetail = post;
+
+    const stateJson = JSON.stringify(state.data);
+    localStorage.setItem('postData', stateJson);
   },
   setData(state, obj) {
     state.data = obj;
+
+    const stateJson = JSON.stringify(state.data);
+    localStorage.setItem('postData', stateJson);
   }
 }
 

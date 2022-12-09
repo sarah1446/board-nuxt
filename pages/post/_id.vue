@@ -1,10 +1,9 @@
 <template>
   <div>
-    {{ post.title }}
-    {{ post.author }}
-    {{ post.createdAt }}
-    {{ post.content }}
-
+    제목: {{ post.title }} <br/>
+    작성자: {{ post.author }} <br/>
+    작성일: {{ post.createdAt }} <br/>
+    내용: {{ post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
   </div>

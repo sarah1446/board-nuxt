@@ -5,6 +5,20 @@
     </main>
   </div>
 </template>
+
+<script>
+export default {
+  mounted() { 
+    const postData = JSON.parse(localStorage.getItem('postData'));
+
+    if(postData) {
+      console.log('postData 있음', postData)
+      this.$store.dispatch('setData', postData)
+    }
+  },
+}
+</script>
+
 <style>
 :root {
   --primary-color: #00c58e;
