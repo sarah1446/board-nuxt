@@ -1,8 +1,8 @@
 <template>
   <div>
-    {{ notice.author }}
-    <input v-model="notice.title" type="text">
-    <textarea id="" v-model="notice.content" name="" cols="30" rows="10" ></textarea>
+    {{ updatedPost.author }}
+    <input v-model="updatedPost.title" type="text">
+    <textarea id="" v-model="updatedPost.content" name="" cols="30" rows="10" ></textarea>
     <button @click="updatePost">저장</button>
     <button @click="cancelUpdate">취소</button>
   </div>
@@ -14,11 +14,11 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      notice:{},
+      updatedPost:{},
     }
   },
   fetch(){
-    this.getPostDetail();
+    this.updatedPost = {...this.post.post}
   },
   computed: {
     ...mapGetters({
@@ -27,14 +27,11 @@ export default {
     }),
   },
   methods: {
-    getPostDetail() {
-      this.notice = {...this.post.post};
-    },
     routeToIndex() {
       this.$router.push('/')
     },
     updatePost() {
-      this.$store.dispatch('updatePost', [this.$route.params.id, this.notice])
+      this.$store.dispatch('updatePost', [this.$route.params.id, this.updatedPost])
       this.routeToIndex();
     },
     cancelUpdate(){
