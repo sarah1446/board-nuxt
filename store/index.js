@@ -8,17 +8,17 @@ export const actions = {
     commit('setAddPost', post)
   },
   getPostDetail({ commit, state }, id) {
-    const post = state.data && state.data.filter(post => post.id === Number(id));
-    
+    const post = state.data && state.data.filter(post => post.post.id === Number(id));
+   
     commit('setPostDetail', ...post)
   },
   deletePost({commit, state}, id) {
-    const posts = state.data.filter(post => post.id !== Number(id))
+    const posts = state.data.filter(post => post.post.id !== Number(id))
 
     commit('setData', posts);
   },
   updatePost({commit, state}, obj) {
-    const idx = state.data.findIndex(post => post.id === Number(obj[0]));
+    const idx = state.data.findIndex(post => post.post.id === Number(obj[0]));
     const newState = [...state.data];
     newState.splice(idx, 1, obj[1]);
 

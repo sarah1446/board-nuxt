@@ -10,13 +10,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(post, index) in posts" :key="index">
+        <tr v-for="(item, index) in posts" :key="index">
           <td>{{ index + 1 }}</td>
           <td>
-            <NuxtLink :to="`post/${post.id}`">{{ post.title }}</NuxtLink>
+            <NuxtLink :to="`post/${item.post.id}`">{{ item.post.title }}</NuxtLink>
           </td>
-          <td>{{ post.author }}</td>
-          <td>{{ post.createdAt }}</td>
+          <td>{{ item.post.author }}</td>
+          <td>{{ item.post.createdAt }}</td>
         </tr>
       </tbody>
     </table>

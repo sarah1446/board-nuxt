@@ -1,9 +1,9 @@
 <template>
   <div>
-    제목: {{ post.title }} <br/>
-    작성자: {{ post.author }} <br/>
-    작성일: {{ post.createdAt }} <br/>
-    내용: {{ post.content }} <br/>
+    제목: {{ post.post.title }} <br/>
+    작성자: {{ post.post.author }} <br/>
+    작성일: {{ post.post.createdAt }} <br/>
+    내용: {{ post.post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
   </div>
@@ -16,6 +16,16 @@ export default {
   data() {
     return {
     }
+  },
+  computed: {
+    ...mapGetters({
+      post: 'getPostDetail'
+    })
+  },
+  created() {
+    this.$store.dispatch('getPostDetail', this.$route.params.id)
+  },
+  mounted() { 
   },
   methods: {
     onClickModifyButton() {
@@ -31,19 +41,6 @@ export default {
       this.$store.dispatch('deletePost', this.$route.params.id);
       this.$router.push({name: 'index'})
     }
-  },
-  computed: {
-    ...mapGetters({
-      posts: 'getData',
-      post: 'getPostDetail'
-    })
-  },
-  created() {
-    this.$store.dispatch('getPostDetail', this.$route.params.id)
-  },
-  mounted() { 
-    // console.log(post); //왜 mounted인데 값이 선언이 안됐다고 나올까
-  },
-  
+  }
 }
 </script>

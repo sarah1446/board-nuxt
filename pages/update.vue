@@ -1,8 +1,8 @@
 <template>
   <div>
     {{ notice.author }}
-    <input type="text" v-model="notice.title" >
-    <textarea name="" id="" cols="30" rows="10" v-model="notice.content"></textarea>
+    <input v-model="notice.title" type="text">
+    <textarea id="" v-model="notice.content" name="" cols="30" rows="10" ></textarea>
     <button @click="updatePost">저장</button>
     <button @click="cancelUpdate">취소</button>
   </div>
@@ -20,9 +20,15 @@ export default {
   fetch(){
     this.getPostDetail();
   },
+  computed: {
+    ...mapGetters({
+      posts: 'getData',
+      post: 'getPostDetail'
+    }),
+  },
   methods: {
     getPostDetail() {
-      this.notice = {...this.post};
+      this.notice = {...this.post.post};
     },
     routeToIndex() {
       this.$router.push('/')
@@ -34,12 +40,6 @@ export default {
     cancelUpdate(){
       this.routeToIndex()  
     }
-  },
-  computed: {
-    ...mapGetters({
-      posts: 'getData',
-      post: 'getPostDetail'
-    }),
   },
 }
 </script>
