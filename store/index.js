@@ -17,22 +17,22 @@ export const actions = {
 
     commit('setData', posts);
   },
-  updatePost({commit, state}, obj) {
-    const idx = state.data.findIndex(post => post.post.id === Number(obj[0]));
+  updatePost({commit, state}, updatedPost) {
+    const idx = state.data.findIndex(post => post.post.id === Number(updatedPost.idx));
     const newState = [...state.data];
 
-    newState.splice(idx, 1, {...newState[idx], post: obj[1]});
+    newState.splice(idx, 1, {...newState[idx], post: updatedPost.content});
 
     commit('setData', newState);
   },
-  setData({commit}, obj) {
-    commit('setData', obj)
+  setData({commit}, posts) {
+    commit('setData', posts)
   }
 }
 
 export const mutations = {
-  setAddPost(state, obj) {
-    state.data.push(obj);
+  setAddPost(state, post) {
+    state.data.push(post);
 
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
@@ -43,8 +43,8 @@ export const mutations = {
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
   },
-  setData(state, obj) {
-    state.data = obj;
+  setData(state, posts) {
+    state.data = posts;
 
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
