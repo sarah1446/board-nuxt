@@ -18,7 +18,7 @@ export default {
     }
   },
   fetch(){
-    this.updatedPost = {...this.post.post}
+    this.updatedPost = {...this.post}
   },
   computed: {
     ...mapGetters({
