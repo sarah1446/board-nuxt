@@ -1,42 +1,40 @@
 <template>
   <div>
-    작성자: {{ this.author }} <br/>
-    {{ this.content }}
-    <button @click="saveComment">대댓글</button>
-    <!-- <div v-show="isVisible">
-      <CommentItem />
-    </div> -->
+    <!-- 작성자: {{ replies.author }} <br/>
+    {{ replies.content }} -->
+    <!-- <button @click="saveComment">대댓글</button> -->
+    <div v-if="isVisible">
+      <div v-for="(item, idx) in replies" :key="idx">
+        {{ item.author }} <br/>
+        {{ item.content }} <br/>
+        <CommentItem :replies="replies.replies" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-// import CommentItem from './commentItem.vue'
+import CommentItem from './commentItem.vue'
 
 export default {
-  // components: {
-  //   CommentItem
-  // },
+  components: {
+    CommentItem
+  },
   props: {
-    content: String,
-    author: String,
-    // replies: Object,
+    replies: Array,
   },
-  data() {
-    return {
-      // isVisible: this.replies.length
-    }
-  },
-  method: {
-    saveComment() {
-      // 
-      console.log('댓글 저장!!')
-    }  
+  methods: {
   },
   computed: {
     ...mapGetters({
-      posts: 'getData'
-    })
+    }),
+    isVisible() {
+      return this.replies?.length > 0;
+    }
   },
+  mounted() {
+    console.log('mounted ', this.replies)
+  }
 }
 </script>

@@ -17,7 +17,7 @@ const post1 = {
         {
           id: 1,
           author: 'sarah',
-          content: '퇴근좀 시켜주면 안되겠니',
+          content: '아아악 내눈ㄴ',
           createdAt: '2022-12-02',
           replies: [
             {
