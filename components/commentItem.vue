@@ -4,7 +4,7 @@
     {{ replies.content }} -->
     <!-- <button @click="saveComment">대댓글</button> -->
     <div v-if="isVisible">
-      <div v-for="(item, idx) in replies" :key="idx">
+      <div v-for="(item, idx) in replies" :key="idx" style="backgroundColor:grey; margin: 5px;">
         내용: {{ item.content }}
         <CommentItem :replies="item.replies" />
       </div>
