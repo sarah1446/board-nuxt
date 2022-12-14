@@ -4,12 +4,21 @@ export const state = () => ({
 })
 
 export const actions = {
-  setAddPost({commit}, post) {
-    commit('setAddPost', post)
+  addPost({commit}, post) {
+    const time = post.createdAt;
+    const month = time.getMonth();
+    const date = time.getDate();
+
+    const postInfo = {
+      ...post,
+      createdAt: `${month + 1}월 ${date}일`,
+    }
+
+    commit('addPost', postInfo)
   },
   getPostDetail({ commit, state }, id) {
-    const post = state.data && state.data.filter(post => post.post.id === Number(id));
-   
+    const post = state.data && state.data.filter(post => post.id === Number(id));
+  
     commit('setPostDetail', ...post)
   },
   deletePost({commit, state}, id) {
@@ -31,7 +40,7 @@ export const actions = {
 }
 
 export const mutations = {
-  setAddPost(state, post) {
+  addPost(state, post) {
     state.data.push(post);
 
     const stateJson = JSON.stringify(state.data);
@@ -40,8 +49,8 @@ export const mutations = {
   setPostDetail(state, post) {
     state.postDetail = post;
 
-    const stateJson = JSON.stringify(state.data);
-    localStorage.setItem('postData', stateJson);
+    // const stateJson = JSON.stringify(state.data);
+    // localStorage.setItem('postData', stateJson);
   },
   setData(state, posts) {
     state.data = posts;

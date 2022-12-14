@@ -18,23 +18,19 @@ export default {
 
   methods: {
     savePost() {  
-      const newDate = new Date(); // TODO: 오리지널값도 넘겨서 가지고 있기
-      const month = newDate.getMonth();
-      const date = newDate.getDate();
+      const newDate = new Date();
 
       const postInfo =  {
-        post: {
-          id: newDate.getTime(),
-          title: this.title,
-          content: this.content,
-          author: 'sarah',
-          createdAt: `${month + 1}월 ${date}일`,
-          updatedAt: null,
-        },
+        id: newDate.getTime(),
+        title: this.title,
+        content: this.content,
+        author: 'sarah',
+        createdAt: newDate,
+        updatedAt: null,
         comments: []
       }
 
-      this.$store.dispatch('setAddPost', postInfo);
+      this.$store.dispatch('addPost', postInfo);
       this.$router.push('/')
     }
   }
