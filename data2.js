@@ -11,34 +11,37 @@ const post1 = {
     {
       id: 1,
       author: 'sarah',
-      content: '퇴근좀 시켜주면 안되겠니', // 삭제된 댓글입니다.
+      content: '1. 퇴근좀 시켜주면 안되겠니', // 삭제된 댓글입니다.
       createdAt: '2022-12-02',
       replies: [
         {
           id: 1,
           author: 'sarah',
-          content: '아아악 내눈ㄴ',
+          content: '1-1. 아아악 내눈ㄴ',
           createdAt: '2022-12-02',
           replies: [
             {
               id: 1,
               author: 'kikiki',
-              content: '뭔가 잘못됐어',
+              content: '1-1-1. 뭔가 잘못됐어',
               createdAt: '2022-12-14',
+              replies: []
             },
             {
               id: 2,
               author: 'sarah',
-              content: '아,,,,,,ㅜㅜ',
+              content: '1-1-2. 아,,,,,,ㅜㅜ',
               createdAt: '2022-12-14',
+              replies: []
             }
           ]
         },
         {
           id: 2,
           author: '벌써일년',
-          content: '세월이여',
+          content: '1-2. 세월이여',
           createdAt: '2022-12-04',
+          replies: []
         }
       ]
     },
@@ -46,7 +49,7 @@ const post1 = {
     {
       id: 2,
       author: '도리',
-      content: '오늘 축구한다 !!!!',
+      content: '2. 오늘 축구한다 !!!!',
       createdAt: '2022-12-02',
       replies: [],
     }

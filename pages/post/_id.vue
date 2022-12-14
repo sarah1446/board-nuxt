@@ -12,7 +12,7 @@
     <div>
       <ul>
         <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black">
-          {{ comment.content }}
+          내용!!: {{ comment.content }}
           <CommentItem :replies="comment.replies" />
         </li>
       </ul>
