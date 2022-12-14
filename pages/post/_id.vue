@@ -6,16 +6,35 @@
     내용: {{ post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
+    <div>
+      <CommentInput />
+    </div>
+    <div>
+      <ul>
+        <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black">
+          <CommentItem :author="comment.author" :content="comment.content" :replies="comment.replies"/>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CommentInput from '../../components/commentInput.vue';
+import CommentItem from '../../components/commentItem.vue';
+import data from '../../data2';
 
 export default {
+  components: {
+    CommentInput,
+    CommentItem
+  },
   data() {
     return {
       postId: this.$route.params.id,
+      content: '',
+      comments: data
     }
   },
   computed: {
@@ -42,7 +61,7 @@ export default {
     onClickDeleteButton() {
       this.$store.dispatch('deletePost', this.postId);
       this.$router.push({name: 'index'})
-    }
+    },
   }
 }
 </script>
