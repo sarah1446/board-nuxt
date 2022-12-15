@@ -6,16 +6,20 @@
     내용: {{ post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
-    <div>
-      <CommentInput />
-    </div>
+    
     <div>
       <ul>
         <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black">
-          내용!!: {{ comment.content }}
+          작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
+          내용: {{ comment.content }} <br/>
+          <button @click="openCommentInput(comment)">대댓글</button>
           <CommentItem :replies="comment.replies" />
         </li>
       </ul>
+    </div>
+
+    <div>
+      <CommentInput />
     </div>
   </div>
 </template>
@@ -63,6 +67,18 @@ export default {
       this.$store.dispatch('deletePost', this.postId);
       this.$router.push({name: 'index'})
     },
+    openCommentInput(post) {
+
+      const info = {
+        id: post.id,
+        author: post.author
+      }
+
+      this.$store.dispatch('setOriginalCommentInfo', info)
+      //
+      // console.log('대댓달 댓글 ', post)
+      // console.log('input에서 대댓의 오리지날 정보가져오기 ', this.$store.state.originalCommentInfo)
+    }
   }
 }
 </script>

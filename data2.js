@@ -1,7 +1,7 @@
 const data = [];
 
 const post1 = {
-  id: 1,
+  id: 1111,
   title: '첫번째 게시글입니당.',
   content: '졸려죽것네 진짜ㅉ',
   author: 'sarah',
@@ -9,26 +9,26 @@ const post1 = {
   updatedAt: '2022-12-03',
   comments: [
     {
-      id: 1,
+      id: 333,
       author: 'sarah',
       content: '1. 퇴근좀 시켜주면 안되겠니', // 삭제된 댓글입니다.
       createdAt: '2022-12-02',
       replies: [
         {
-          id: 1,
+          id: 444,
           author: 'sarah',
           content: '1-1. 아아악 내눈ㄴ',
           createdAt: '2022-12-02',
           replies: [
             {
-              id: 1,
+              id: 555,
               author: 'kikiki',
               content: '1-1-1. 뭔가 잘못됐어',
               createdAt: '2022-12-14',
               replies: []
             },
             {
-              id: 2,
+              id: 999,
               author: 'sarah',
               content: '1-1-2. 아,,,,,,ㅜㅜ',
               createdAt: '2022-12-14',
@@ -37,7 +37,7 @@ const post1 = {
           ]
         },
         {
-          id: 2,
+          id: 777,
           author: '벌써일년',
           content: '1-2. 세월이여',
           createdAt: '2022-12-04',

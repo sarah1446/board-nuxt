@@ -1,6 +1,7 @@
 export const state = () => ({
   data: [],
-  postDetail: {}
+  postDetail: {},
+  originalCommentInfo: {}
 })
 
 export const actions = {
@@ -36,6 +37,14 @@ export const actions = {
   },
   setData({commit}, posts) {
     commit('setData', posts)
+  },
+  addComment({commit}, commentInfo) {
+    // 대댓일 경우 commentId 받아와서 분기처리
+    // console.log('store comment ', commentInfo)
+  },
+  setOriginalCommentInfo({commit}, commentInfo) {
+    // console.log('댓글 아이디 ',commentInfo)
+    commit('setOriginalCommentInfo', commentInfo)
   }
 }
 
@@ -54,6 +63,9 @@ export const mutations = {
 
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
+  },
+  setOriginalCommentInfo(state, info) {
+    state.originalCommentInfo = info
   }
 }
 

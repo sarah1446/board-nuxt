@@ -12,24 +12,43 @@ export default {
   data() {
     return {
       content: "",
-      postId: this.$route.params.id
+      postId: this.$route.params.id,
+      originalCommentInfo: this.$store.state.originalCommentInfo, // ? created와 중복
+    }
+  },
+  watch: {
+    originalCommentInfo: function(value, oldValue) {
+      // console.log(value, oldValue)
+      console.log('now data ', value)
+      console.log('대댓글 클릭할때마다 호출 !!watch!')
+      // this.originalCommentInfo = this.$store.state.originalCommentInfo
     }
   },
   computed: {
     ...mapGetters({
       posts: 'getData'
-    })
+    }),
+  },
+  created() {
+    // ??
+    this.originalCommentInfo = this.$store.state.originalCommentInfo;
+    console.log('testing ', this.originalCommentInfo)
   },
   methods: {
     saveComment() {
-      console.log(this.content)
-      // this.$store.dispatch('')
-      // const selectedPostId = this.posts.findIndex(post => post.id === Number(this.postId));
-      // console.log(this.posts[selectedPostId])
-      // console.log(post)
-
-
-      // this.$store.dispatch('setPostComment', {comment: this.content, id: this.postId});
+      const nowTime = new Date();
+      const comment = {
+        id: nowTime.getTime(),
+        author: 'sarah',
+        content: this.content,
+        created: nowTime,
+        relies: []
+      }
+      console.log('comment result ', comment);
+      this.$store.dispatch('addComment', {
+        comment,
+        commentId: null,
+      })
     }
   }
 }
