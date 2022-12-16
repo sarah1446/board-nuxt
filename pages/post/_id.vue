@@ -75,9 +75,6 @@ export default {
       }
 
       this.$store.dispatch('setOriginalCommentInfo', info)
-      //
-      // console.log('대댓달 댓글 ', post)
-      // console.log('input에서 대댓의 오리지날 정보가져오기 ', this.$store.state.originalCommentInfo)
     }
   }
 }

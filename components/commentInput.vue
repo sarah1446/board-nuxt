@@ -2,6 +2,10 @@
   <div>
     <input v-model="content" type="text" name="" id="">
     <button @click="saveComment">댓글 저장</button>
+    <div v-if="commentId" style="border: 1px solid black;">
+      {{ this.commentAuthor }}님에게 댓글달기
+      <button @click="cancelRecomment">대댓글 취소</button>
+    </div>
   </div>
 </template>
 
@@ -13,26 +17,26 @@ export default {
     return {
       content: "",
       postId: this.$route.params.id,
-      originalCommentInfo: this.$store.state.originalCommentInfo, // ? created와 중복
+      commentId: null,
+
     }
   },
   watch: {
-    originalCommentInfo: function(value, oldValue) {
-      // console.log(value, oldValue)
-      console.log('now data ', value)
-      console.log('대댓글 클릭할때마다 호출 !!watch!')
-      // this.originalCommentInfo = this.$store.state.originalCommentInfo
-    }
+    originalCommentInfo: {
+      handler: function (val, oldVal) {
+        this.commentId = val.id
+        this.commentAuthor = val.author
+      },
+      deep: true
+    },
   },
   computed: {
     ...mapGetters({
-      posts: 'getData'
+      posts: 'getData',
+      originalCommentInfo: 'getOriginalCommentInfo'
     }),
   },
-  created() {
-    // ??
-    this.originalCommentInfo = this.$store.state.originalCommentInfo;
-    console.log('testing ', this.originalCommentInfo)
+  mounted() {
   },
   methods: {
     saveComment() {
@@ -44,11 +48,15 @@ export default {
         created: nowTime,
         relies: []
       }
-      console.log('comment result ', comment);
+     
       this.$store.dispatch('addComment', {
         comment,
-        commentId: null,
+        commentId: this.originalCommentInfo.id ?? null,
       })
+    },
+    cancelRecomment() {
+      // 대댓글 취소, store값 변경
+      this.$store.dispatch('resetOriginalCommentInfo')
     }
   }
 }

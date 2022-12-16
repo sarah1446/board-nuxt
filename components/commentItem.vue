@@ -30,7 +30,6 @@ export default {
         id: post.id,
         author: post.author,
       }
-      // console.log('대댓달 댓글 ', post)
       this.$store.dispatch('setOriginalCommentInfo', info)
     }
   },

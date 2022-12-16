@@ -40,11 +40,17 @@ export const actions = {
   },
   addComment({commit}, commentInfo) {
     // 대댓일 경우 commentId 받아와서 분기처리
-    // console.log('store comment ', commentInfo)
+    if(commentInfo.commentId) {
+      // 대댓
+    }else {
+      // 그냥 댓글
+    }
   },
   setOriginalCommentInfo({commit}, commentInfo) {
-    // console.log('댓글 아이디 ',commentInfo)
     commit('setOriginalCommentInfo', commentInfo)
+  },
+  resetOriginalCommentInfo({commit}) {
+    commit('resetOriginalCommentInfo')
   }
 }
 
@@ -66,6 +72,9 @@ export const mutations = {
   },
   setOriginalCommentInfo(state, info) {
     state.originalCommentInfo = info
+  },
+  resetOriginalCommentInfo(state) {
+    state.originalCommentInfo = {}
   }
 }
 
@@ -75,5 +84,8 @@ export const getters = {
   },
   getPostDetail(state) {
     return state.postDetail;
+  },
+  getOriginalCommentInfo(state) {
+    return state.originalCommentInfo;
   }
 }
