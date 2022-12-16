@@ -2,8 +2,8 @@
   <div>
     <input v-model="content" type="text" name="" id="">
     <button @click="saveComment">댓글 저장</button>
-    <div v-if="commentId" style="border: 1px solid black;">
-      {{ this.commentAuthor }}님에게 댓글달기
+    <div v-if="targetCommentId" style="border: 1px solid black;">
+      "{{ this.commentAuthor }}"님에게 댓글달기
       <button @click="cancelRecomment">대댓글 취소</button>
     </div>
   </div>
@@ -17,14 +17,13 @@ export default {
     return {
       content: "",
       postId: this.$route.params.id,
-      commentId: null,
-
+      targetCommentId: null,
     }
   },
   watch: {
     originalCommentInfo: {
       handler: function (val, oldVal) {
-        this.commentId = val.id
+        this.targetCommentId = val.id
         this.commentAuthor = val.author
       },
       deep: true
@@ -41,7 +40,7 @@ export default {
   methods: {
     saveComment() {
       const nowTime = new Date();
-      const comment = {
+      const commentInfo = {
         id: nowTime.getTime(),
         author: 'sarah',
         content: this.content,
@@ -50,8 +49,9 @@ export default {
       }
      
       this.$store.dispatch('addComment', {
-        comment,
-        commentId: this.originalCommentInfo.id ?? null,
+        postId: this.$route.params.id,
+        comment: commentInfo,
+        targetCommentId: this.originalCommentInfo.id ?? null,
       })
     },
     cancelRecomment() {

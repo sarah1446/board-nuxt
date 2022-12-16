@@ -19,7 +19,7 @@ export const actions = {
   },
   getPostDetail({ commit, state }, id) {
     const post = state.data && state.data.filter(post => post.id === Number(id));
-  
+
     commit('setPostDetail', ...post)
   },
   deletePost({commit, state}, id) {
@@ -38,12 +38,30 @@ export const actions = {
   setData({commit}, posts) {
     commit('setData', posts)
   },
-  addComment({commit}, commentInfo) {
+
+
+  addComment({commit, state}, postInfo) {
+    const postId = postInfo.postId; 
+    const newCommentInfo = postInfo.comment;
+    const targetPost = state.data.filter(item => item.id === Number(postId))[0];
+    const targetCommentId = postInfo.targetCommentId ?? null;
     // 대댓일 경우 commentId 받아와서 분기처리
-    if(commentInfo.commentId) {
+    if(postId && targetCommentId) {
       // 대댓
-    }else {
+      commit('updateComment', {
+        targetPost, 
+        newCommentInfo, 
+        postId, 
+        targetCommentId
+      })
+    }else if(postId && !targetCommentId){
       // 그냥 댓글
+      commit('updateComment', {
+        targetPost,
+        postId, 
+        newCommentInfo, 
+        targetCommentId
+      }) 
     }
   },
   setOriginalCommentInfo({commit}, commentInfo) {
@@ -75,6 +93,19 @@ export const mutations = {
   },
   resetOriginalCommentInfo(state) {
     state.originalCommentInfo = {}
+  }, 
+  updateComment(state, info) {
+    const targetPost = info.targetPost;
+    // const postId = info.postId;
+    const newCommentInfo = info.newCommentInfo;
+    // const targetCommentId = info.targetCommentId;
+
+    if(info.targetCommentId) {
+      // 대댓 => target comment의 replies에 push
+    }else {
+      // 댓글 
+      targetPost.comments.push(newCommentInfo)
+    }
   }
 }
 
