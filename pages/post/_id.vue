@@ -17,7 +17,7 @@
         </li>
       </ul> -->
       <ul>
-        <li v-for="(comment, index) in comments2" :key="index" style="border: 1px solid black">
+        <li v-for="(comment, index) in comments2" :key="index" style="border: 1px solid black" @click=test(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
           <button @click="openCommentInput(comment)">대댓글</button>
@@ -92,7 +92,9 @@ export default {
       }
 
       this.$store.dispatch('setOriginalCommentInfo', info)
-    }
+    },
+
+    test(item){console.log(item);}
   }
 }
 </script>

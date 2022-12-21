@@ -1,3 +1,4 @@
+
 export const state = () => ({
   data: [],
   postDetail: {},
@@ -98,14 +99,27 @@ export const mutations = {
     const targetPost = info.targetPost;
     // const postId = info.postId;
     const newCommentInfo = info.newCommentInfo;
-    // const targetCommentId = info.targetCommentId;
+    const targetCommentId = info.targetCommentId;
+    console.log(info)
 
-    if(info.targetCommentId) {
-      // 대댓 => target comment의 replies에 push
+    // if(info.targetPost.comments){
+    //   info.targetPost.comments = []
+    // }
+
+    // info.targetPost.comments
+
+    const target = state.data[info.targetPost.id];
+    console.log('target', target)
+     
+    
+    if(targetCommentId) {
+      //
     }else {
       // 댓글 
-      targetPost.comments.push(newCommentInfo)
+      targetPost.comments.push(newCommentInfo);
     }
+    const stateJson = JSON.stringify(state.data);
+    localStorage.setItem('postData', stateJson);
   }
 }
 
