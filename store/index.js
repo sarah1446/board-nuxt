@@ -101,21 +101,22 @@ export const mutations = {
     const targetPost = info.targetPost;
     const targetCommentId = info.targetCommentId;
     const newCommentInfo = info.newCommentInfo;
-    // console.log('targetCommentId', targetCommentId)
-    console.log('parentCommendId', info.parentCommentId)
-
+    // const parentCommentId = info.parentCommentId;
 
     if(targetCommentId) {
       // 대댓
-      if(!targetPost.comments) return;
+      function generateReply(comments) {
+        comments.map(comment => {
+          if(comment.id === targetCommentId) {
+            comment.replies.push(newCommentInfo)
+          }else if(comment.id !== targetCommentId && comment.replies.length > 0){
+            generateReply(comment.replies)
+          }
+          return comment
+        })
+      }
 
-      // 1 deps만 먹힘
-      const targetComment = targetPost.comments.find(el => el.id === targetCommentId) 
-      console.log('targetComment ', targetComment)
-
-      if(!targetComment) return;
-
-      targetComment.replies.push(newCommentInfo)
+      generateReply(targetPost.comments)
     }else {
       // 댓글 
       targetPost.comments.push(newCommentInfo);
