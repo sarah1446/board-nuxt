@@ -45,7 +45,7 @@ export default {
         author: 'sarah',
         content: this.content,
         created: nowTime,
-        relies: []
+        replies: []
       }
      
       this.$store.dispatch('addComment', {
