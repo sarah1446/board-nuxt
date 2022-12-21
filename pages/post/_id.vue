@@ -17,7 +17,7 @@
         </li>
       </ul> -->
       <ul>
-        <li v-for="(comment, index) in comments2" :key="index" style="border: 1px solid black" @click=test(comment)>
+        <li v-for="(comment, index) in comments2" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
           <button @click="openCommentInput(comment)">대댓글</button>
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-      <CommentInput />
+      <CommentInput :parentCommentId="parentCommentId" />
     </div>
   </div>
 </template>
@@ -49,6 +49,8 @@ export default {
       content: '',
       comments: data[0].comments,
       comments2: null,
+
+      parentCommentId:0
     }
   },
   watch: {
@@ -94,7 +96,9 @@ export default {
       this.$store.dispatch('setOriginalCommentInfo', info)
     },
 
-    test(item){console.log(item);}
+    setParentCommentId(item){
+      this.parentCommentId = item.id
+      }
   }
 }
 </script>

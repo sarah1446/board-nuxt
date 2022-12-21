@@ -46,6 +46,7 @@ export const actions = {
     const newCommentInfo = postInfo.comment;
     const targetPost = state.data.filter(item => item.id === Number(postId))[0];
     const targetCommentId = postInfo.targetCommentId ?? null;
+    const parentCommentId = postInfo.parentCommentId
     // 대댓일 경우 commentId 받아와서 분기처리
     if(postId && targetCommentId) {
       // 대댓
@@ -53,7 +54,8 @@ export const actions = {
         targetPost, 
         newCommentInfo, 
         postId, 
-        targetCommentId
+        targetCommentId,
+        parentCommentId
       })
     }else if(postId && !targetCommentId){
       // 그냥 댓글
@@ -108,12 +110,20 @@ export const mutations = {
 
     // info.targetPost.comments
 
-    const target = state.data[info.targetPost.id];
-    console.log('target', target)
+    
      
     
     if(targetCommentId) {
       //
+      
+      console.log('targetPost', targetPost)
+
+      if(!targetPost.comments) return;
+
+      const targetComment= targetPost.comments.find(el.id===targetCommentId)
+       console.log("targetComment",targetComment)
+      if(!targetComment) return;
+
     }else {
       // 댓글 
       targetPost.comments.push(newCommentInfo);

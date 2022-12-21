@@ -13,6 +13,11 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  props:{
+    parentCommentId:{
+      type:Number,
+    }
+  },
   data() {
     return {
       content: "",
@@ -49,6 +54,7 @@ export default {
       }
      
       this.$store.dispatch('addComment', {
+        parentCommentId:this.parentCommentId,
         postId: this.$route.params.id,
         comment: commentInfo,
         targetCommentId: this.originalCommentInfo.id ?? null,
