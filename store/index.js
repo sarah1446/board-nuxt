@@ -50,7 +50,7 @@ export const actions = {
     // 대댓일 경우 commentId 받아와서 분기처리
     if(postId && targetCommentId) {
       // 대댓
-      commit('updateComment', {
+      commit('addComment', {
         targetPost, 
         newCommentInfo, 
         postId, 
@@ -59,7 +59,7 @@ export const actions = {
       })
     }else if(postId && !targetCommentId){
       // 그냥 댓글
-      commit('updateComment', {
+      commit('addComment', {
         targetPost,
         postId, 
         newCommentInfo, 
@@ -97,31 +97,22 @@ export const mutations = {
   resetOriginalCommentInfo(state) {
     state.originalCommentInfo = {}
   }, 
-  updateComment(state, info) {
+  addComment(state, info) {
     const targetPost = info.targetPost;
-    // const postId = info.postId;
-    const newCommentInfo = info.newCommentInfo;
     const targetCommentId = info.targetCommentId;
-    console.log(info)
+    const newCommentInfo = info.newCommentInfo;
+    // console.log('targetCommentId', targetCommentId)
+    console.log('parentCommendId', info.parentCommentId)
 
-    // if(info.targetPost.comments){
-    //   info.targetPost.comments = []
-    // }
 
-    // info.targetPost.comments
-
-    
-     
-    
     if(targetCommentId) {
-      //
-      
-      console.log('targetPost', targetPost)
-
+      // 대댓
       if(!targetPost.comments) return;
 
-      const targetComment= targetPost.comments.find(el=>el.id===targetCommentId)
-       console.log("targetComment",targetComment)
+      // 1 deps만 먹힘
+      const targetComment = targetPost.comments.find(el => el.id === targetCommentId) 
+      console.log('targetComment ', targetComment)
+
       if(!targetComment) return;
 
       targetComment.replies.push(newCommentInfo)
@@ -130,7 +121,6 @@ export const mutations = {
       targetPost.comments.push(newCommentInfo);
     }
 
-    
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
   }

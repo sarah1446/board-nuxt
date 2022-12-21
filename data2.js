@@ -25,7 +25,31 @@ const post1 = {
               author: 'kikiki',
               content: '1-1-1. 뭔가 잘못됐어',
               createdAt: '2022-12-14',
-              replies: []
+              replies: [
+                {
+                  id: 555,
+                  author: 'kikiki',
+                  content: '1-1-1. 뭔가 잘못됐어',
+                  createdAt: '2022-12-14',
+                  replies: [
+                    {
+                      id: 555,
+                      author: 'kikiki',
+                      content: '1-1-1. 뭔가 잘못됐어',
+                      createdAt: '2022-12-14',
+                      replies: [
+                        {
+                          id: 555,
+                          author: 'kikiki',
+                          content: '1-1-1. 뭔가 잘못됐어',
+                          createdAt: '2022-12-14',
+                          replies: []
+                        },
+                      ]
+                    },
+                  ]
+                },
+              ]
             },
             {
               id: 999,

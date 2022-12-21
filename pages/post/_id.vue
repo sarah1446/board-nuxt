@@ -8,16 +8,8 @@
     <button @click="onClickDeleteButton">삭제</button>
     
     <div>
-      <!-- <ul>
-        <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black">
-          작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
-          내용: {{ comment.content }} <br/>
-          <button @click="openCommentInput(comment)">대댓글</button>
-          <CommentItem :replies="comment.replies" />
-        </li>
-      </ul> -->
       <ul>
-        <li v-for="(comment, index) in comments2" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
+        <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
           <button @click="openCommentInput(comment)">대댓글</button>
@@ -36,7 +28,6 @@
 import { mapGetters } from 'vuex';
 import CommentInput from '../../components/commentInput.vue';
 import CommentItem from '../../components/commentItem.vue';
-import data from '../../data2';
 
 export default {
   components: {
@@ -47,8 +38,7 @@ export default {
     return {
       postId: this.$route.params.id,
       content: '',
-      comments: data[0].comments,
-      comments2: null,
+      comments: null,
 
       parentCommentId:0
     }
@@ -56,7 +46,7 @@ export default {
   watch: {
     post: {
       handler: function(val, oldVal) {
-        this.comments2 = val.comments
+        this.comments = val.comments
       }
     }
   },
@@ -98,7 +88,7 @@ export default {
 
     setParentCommentId(item){
       this.parentCommentId = item.id
-      }
+    }
   }
 }
 </script>
