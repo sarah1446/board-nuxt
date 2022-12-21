@@ -120,14 +120,17 @@ export const mutations = {
 
       if(!targetPost.comments) return;
 
-      const targetComment= targetPost.comments.find(el.id===targetCommentId)
+      const targetComment= targetPost.comments.find(el=>el.id===targetCommentId)
        console.log("targetComment",targetComment)
       if(!targetComment) return;
 
+      targetComment.replies.push(newCommentInfo)
     }else {
       // 댓글 
       targetPost.comments.push(newCommentInfo);
     }
+
+    
     const stateJson = JSON.stringify(state.data);
     localStorage.setItem('postData', stateJson);
   }
