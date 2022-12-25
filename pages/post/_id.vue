@@ -1,9 +1,9 @@
 <template>
   <div>
-    제목: {{ post.title }} <br/>
-    작성자: {{ post.author }} <br/>
-    작성일: {{ post.createdAt }} <br/>
-    내용: {{ post.content }} <br/>
+    제목: {{ post && post.title }} <br/>
+    작성자: {{ post && post.author }} <br/>
+    작성일: {{ post && post.createdAt }} <br/>
+    내용: {{ post && post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
     
@@ -12,7 +12,7 @@
         <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
-          <button @click="openCommentInput(comment)">대댓글</button>
+          <button @click="openCommentGuide(comment)">대댓글</button>
           <CommentItem :replies="comment.replies" />
         </li>
       </ul>
@@ -48,7 +48,7 @@ export default {
       handler: function(val, oldVal) {
         this.comments = val.comments
       }
-    }
+    },
   },
   computed: {
     ...mapGetters({
@@ -60,7 +60,6 @@ export default {
     this.$store.dispatch('getPostDetail', this.postId)
   },
   mounted() { 
-    
   },
   methods: {
     onClickModifyButton() {
@@ -76,8 +75,7 @@ export default {
       this.$store.dispatch('deletePost', this.postId);
       this.$router.push({name: 'index'})
     },
-    openCommentInput(post) {
-
+    openCommentGuide(post) {
       const info = {
         id: post.id,
         author: post.author
