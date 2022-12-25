@@ -9,7 +9,7 @@
     
     <div>
       <ul>
-        <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
+        <li v-for="(comment, index) in post.comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
           <button @click="openCommentGuide(comment)">대댓글</button>
@@ -38,22 +38,16 @@ export default {
     return {
       postId: this.$route.params.id,
       content: '',
-      comments: null,
-
+      // comments: null, 
+      // TODO: 뷰에서 리스트로 갔다가 다시 같은 글 누르면 댓글 안나옴 
+      // mapGetters의 post.comments로 접근함
+ 
       parentCommentId:0
     }
-  },
-  watch: {
-    post: {
-      handler: function(val, oldVal) {
-        this.comments = val.comments
-      }
-    },
   },
   computed: {
     ...mapGetters({
       post: 'getPostDetail',
-      posts: 'getData'
     })
   },
   created() {
