@@ -1,21 +1,25 @@
 <template>
   <div>
-    제목: {{ post.title }} <br/>
-    작성자: {{ post.author }} <br/>
-    작성일: {{ post.createdAt }} <br/>
-    내용: {{ post.content }} <br/>
+    제목: {{ post && post.title }} <br/>
+    작성자: {{ post && post.author }} <br/>
+    작성일: {{ post && post.createdAt }} <br/>
+    내용: {{ post && post.content }} <br/>
     <button @click="onClickModifyButton">수정</button>
     <button @click="onClickDeleteButton">삭제</button>
-    <div>
-      <CommentInput />
-    </div>
+    
     <div>
       <ul>
-        <li v-for="(comment, index) in comments" :key="index" style="border: 1px solid black">
-          내용!!: {{ comment.content }}
+        <li v-for="(comment, index) in post.comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
+          작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
+          내용: {{ comment.content }} <br/>
+          <button @click="openCommentGuide(comment)">대댓글</button>
           <CommentItem :replies="comment.replies" />
         </li>
       </ul>
+    </div>
+
+    <div>
+      <CommentInput :parentCommentId="parentCommentId" />
     </div>
   </div>
 </template>
@@ -24,7 +28,6 @@
 import { mapGetters } from 'vuex';
 import CommentInput from '../../components/commentInput.vue';
 import CommentItem from '../../components/commentItem.vue';
-import data from '../../data2';
 
 export default {
   components: {
@@ -35,19 +38,22 @@ export default {
     return {
       postId: this.$route.params.id,
       content: '',
-      comments: data[0].comments
+      // comments: null, 
+      // TODO: 뷰에서 리스트로 갔다가 다시 같은 글 누르면 댓글 안나옴 
+      // mapGetters의 post.comments로 접근함
+ 
+      parentCommentId:0
     }
   },
   computed: {
     ...mapGetters({
-      post: 'getPostDetail'
+      post: 'getPostDetail',
     })
   },
   created() {
     this.$store.dispatch('getPostDetail', this.postId)
   },
   mounted() { 
-    
   },
   methods: {
     onClickModifyButton() {
@@ -63,6 +69,18 @@ export default {
       this.$store.dispatch('deletePost', this.postId);
       this.$router.push({name: 'index'})
     },
+    openCommentGuide(post) {
+      const info = {
+        id: post.id,
+        author: post.author
+      }
+
+      this.$store.dispatch('setOriginalCommentInfo', info)
+    },
+
+    setParentCommentId(item){
+      this.parentCommentId = item.id
+    }
   }
 }
 </script>
