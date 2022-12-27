@@ -22,7 +22,7 @@
       </tbody>
     </table>
     <div> 
-      <pagination @setPageList="setPageList" :pagingSetting="setPaging(this.totalCount, this.limit)" />
+      <pagination @setPageList="setPageList" :pagingSetting="setPaging(this.totalCount, this.limit, this.currentPage)" />
     </div>
   </div>
 </template>
@@ -43,7 +43,6 @@ export default {
       currentPageList: [],
       totalData: [],
       totalCount: null,
-
       totalPage: null,
     }
   },
@@ -69,11 +68,24 @@ export default {
       this.currentPageList = this.posts.slice((page - 1)*this.limit, (page - 1)*this.limit + this.limit);
 
       // setPaging()
-      this.setPaging(this.totalCount, this.limit);
+      this.setPaging(this.totalCount, this.limit, page);
     },
-    setPaging(totalCount, limit) {
-      return this.totalPage;
+    setPaging(totalCount, limit, page) {
+      // 몇번째 block인지(5페이지는 4,5,6노출이니까 두번째 block)
+      const blockNumbering = Math.ceil(page/this.blockSize);
+
+      // 한번에 보여지는 페이지네이션 범위
+      const paginationBlockRange = [];
+      const blockFirstBtn = this.blockSize * (blockNumbering - 1) + 1;
+      const blockLastBtn = this.blockSize * blockNumbering;
+      console.log('first => ', blockFirstBtn, 'last => ', blockLastBtn)
+
+      for(let index = blockFirstBtn; index <= blockLastBtn; index++) {
+        paginationBlockRange.push(index);
+
+      }
       // 누른값이 처음인지 마지막인지
+      return paginationBlockRange;
     }
   },
   
