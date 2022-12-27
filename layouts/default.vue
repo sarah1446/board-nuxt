@@ -8,10 +8,11 @@
 
 <script>
 export default {
-  mounted() { 
+  created() { 
     const postData = JSON.parse(localStorage.getItem('postData'));
 
     if(postData) {
+      // $nuxt.$store.dispatch('setData', postData)
       this.$store.dispatch('setData', postData)
     }
   },
