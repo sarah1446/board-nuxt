@@ -12,7 +12,6 @@ export default {
     const postData = JSON.parse(localStorage.getItem('postData'));
 
     if(postData) {
-      // $nuxt.$store.dispatch('setData', postData) // TODO 무슨차이일까
       this.$store.dispatch('setData', postData)
     }
   },

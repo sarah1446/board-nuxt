@@ -67,7 +67,7 @@ export default {
     },
     onClickDeleteButton() {
       this.$store.dispatch('deletePost', this.postId);
-      this.$router.push({name: 'index'})
+      this.$router.push({ name: 'index' })
     },
     openCommentGuide(post) {
       const info = {

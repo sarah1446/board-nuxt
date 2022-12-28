@@ -41,8 +41,7 @@ export default {
       blockSize: 3,
       currentPage: 1,
       currentPageList: [],
-      totalData: [],
-      totalCount: null,
+      totalCount: this.$store.state.data.length,
     }
   },
   computed: {
@@ -53,16 +52,13 @@ export default {
   created() {
   },
   mounted() {
-    this.totalData = this.posts;
-    this.totalCount = this.posts.length;
-    
     this.setPageList(1)
   },
   methods: {
     setPageList(page) {
       // page에 해당하는 list 잘라서 보여주기
       this.currentPage = page;
-      this.currentPageList = this.posts.slice((page - 1)*this.limit, (page - 1)*this.limit + this.limit);
+      this.currentPageList = this.posts.slice((page - 1) * this.limit, (page - 1) * this.limit + this.limit);
 
       this.setPaging(this.totalCount, this.limit, this.blockSize, page);
     },
@@ -71,7 +67,7 @@ export default {
       const currentPage = page;
 
       const first =
-        currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
+        currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null 
       const end =
         totalPage !== currentPage
           ? parseInt(currentPage, 10) + parseInt(1, 10)

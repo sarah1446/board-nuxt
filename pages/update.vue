@@ -31,7 +31,7 @@ export default {
       this.$router.push('/')
     },
     updatePost() {
-      this.$store.dispatch('updatePost', {idx: this.$route.params.id, content: this.updatedPost})
+      this.$store.dispatch('updatePost', { idx: this.$route.params.id, content: this.updatedPost })
       this.routeToIndex();
     },
     cancelUpdate(){

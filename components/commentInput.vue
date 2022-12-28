@@ -13,9 +13,9 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props:{
+  props: {
     parentCommentId:{
-      type:Number,
+      type: Number,
     }
   },
   data() {

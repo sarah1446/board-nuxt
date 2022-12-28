@@ -13,11 +13,6 @@
 <script>
 export default {
   props: ["pagingSetting"],
-  data() {
-    return {
-      
-    }
-  },
   methods: {
     onClickPaging(page) {
       this.$emit('setPageList', page)

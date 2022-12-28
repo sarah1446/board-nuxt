@@ -6,7 +6,6 @@
         내용: {{ item.content }} <br/> / id => {{ item.id }}
         <button @click="() => openCommentInput(item)">대댓글</button>
         <CommentItem :replies="item.replies" />
-        <!-- TODO: 대댓 input창열리고 취소버튼 누르면 store의 originalCommentInfo 빈값으로 처리 -->
       </div>
     </div>
   </div>
