@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <button> &lt; </button>
+  <div> 
+    <button v-if="pagingSetting.first !== null" @click="pagingSetting.first !== null ? onClickPaging(pagingSetting.first) : ''"> &lt; </button>
     <ul>
-      <li @click="onClickPaging(page)" v-for="page in pagingSetting" :key="page"> 
+      <li :key="page" @click="onClickPaging(page)" v-for="page in pagingSetting.list"> 
         {{ page }}
       </li>
     </ul>
-    <button> &gt; </button>
+    <button v-if="pagingSetting.end !== null" @click="pagingSetting.end !== null ? onClickPaging(pagingSetting.end) : ''"> &gt; </button>
   </div>
 </template>
 
@@ -22,13 +22,6 @@ export default {
     onClickPaging(page) {
       this.$emit('setPageList', page)
     }
-   
-  },
-  computed: {
-  },
-  created() {
-  },
-  mounted() {
   }
 }
 </script>

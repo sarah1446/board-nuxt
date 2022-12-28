@@ -22,7 +22,7 @@
       </tbody>
     </table>
     <div> 
-      <pagination @setPageList="setPageList" :pagingSetting="setPaging(this.totalCount, this.limit, this.currentPage)" />
+      <pagination @setPageList="setPageList" :pagingSetting="setPaging(this.totalCount, this.limit, this.blockSize, this.currentPage)" />
     </div>
   </div>
 </template>
@@ -43,7 +43,6 @@ export default {
       currentPageList: [],
       totalData: [],
       totalCount: null,
-      totalPage: null,
     }
   },
   computed: {
@@ -56,9 +55,7 @@ export default {
   mounted() {
     this.totalData = this.posts;
     this.totalCount = this.posts.length;
-    this.totalPage = Math.ceil(this.posts.length / this.limit);
-
-    // call
+    
     this.setPageList(1)
   },
   methods: {
@@ -67,28 +64,29 @@ export default {
       this.currentPage = page;
       this.currentPageList = this.posts.slice((page - 1)*this.limit, (page - 1)*this.limit + this.limit);
 
-      // setPaging()
-      this.setPaging(this.totalCount, this.limit, page);
+      this.setPaging(this.totalCount, this.limit, this.blockSize, page);
     },
-    setPaging(totalCount, limit, page) {
-      // 몇번째 block인지(5페이지는 4,5,6노출이니까 두번째 block)
-      const blockNumbering = Math.ceil(page/this.blockSize);
+    setPaging(totalCount, limit, blockSize, page) {
+      const totalPage = Math.ceil(totalCount/limit);
+      const currentPage = page;
 
-      // 한번에 보여지는 페이지네이션 범위
-      const paginationBlockRange = [];
-      const blockFirstBtn = this.blockSize * (blockNumbering - 1) + 1;
-      const blockLastBtn = this.blockSize * blockNumbering;
-      console.log('first => ', blockFirstBtn, 'last => ', blockLastBtn)
+      const first =
+        currentPage > 1 ? parseInt(currentPage, 10) - parseInt(1, 10) : null
+      const end =
+        totalPage !== currentPage
+          ? parseInt(currentPage, 10) + parseInt(1, 10)
+          : null
 
-      for(let index = blockFirstBtn; index <= blockLastBtn; index++) {
-        paginationBlockRange.push(index);
+      const startIndex = (Math.ceil(currentPage / blockSize) - 1) * blockSize + 1
+      const endIndex =
+        startIndex + blockSize > totalPage ? totalPage : startIndex + blockSize - 1
 
+      const list = []
+      for (let index = startIndex; index <= endIndex; index++) {
+        list.push(index)
       }
-      // 누른값이 처음인지 마지막인지
-      return paginationBlockRange;
-    }
-  },
-  
-
+      return { first, end, list, currentPage }
+    },
+  }
 }
 </script>
