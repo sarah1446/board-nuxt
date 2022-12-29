@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      posts: 'getData'
+      posts: 'getReverseData'
     }),
   },
   created() {

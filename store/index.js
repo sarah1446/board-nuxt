@@ -131,6 +131,10 @@ export const getters = {
   getData(state) {
     return state.data;
   },
+  getReverseData(state) {
+    const reversedData = [...state.data].reverse()
+    return reversedData;
+  },
   getPostDetail(state) {
     return state.postDetail;
   },
