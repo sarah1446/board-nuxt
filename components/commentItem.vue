@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="comment-item">
     <div v-if="isVisible">
-      <div v-for="(item, idx) in replies" :key="idx" style="backgroundColor:grey; margin: 5px;">
+      <div v-for="(item, idx) in replies" :key="idx">
         작성자: {{ item.author }} <br/>
         내용: {{ item.content }} <br/> / id => {{ item.id }}
         <button @click="() => openCommentInput(item)">대댓글</button>
