@@ -1,2 +1,16 @@
+// default
+@import "./default";
+
+// index
+@import "./index";
+
+// reset
+@import "./base/reset";
+
 // components
 @import "./components/commentItem";
+@import "./components/pagination";
+
+// pages
+@import "./pages/id";
+

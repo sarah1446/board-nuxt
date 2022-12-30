@@ -1,0 +1,6 @@
+@mixin ellipsis1( $width) {
+  width: $width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  /* 말줄임 적용 */
+}

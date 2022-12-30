@@ -1,0 +1,31 @@
+.pagination {
+  @apply 
+  h-[32px];
+
+  & > div {
+    @apply
+    flex justify-center;
+
+    button {
+      @apply
+      inline-block border-solid text-slate-500 hover:bg-blue-200;
+    }
+  
+    ul {
+      @apply 
+      flex border-solid mx-[0px];
+  
+      li {
+        @apply
+        inline-block text-2xl mx-[20px] text-slate-400 hover:text-slate-800 cursor-pointer;
+
+        span {
+          @apply
+          text-center w-[25px] inline-block rounded-md; 
+        }
+      }
+    }
+  }
+
+ 
+}

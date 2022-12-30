@@ -1,26 +1,20 @@
 <template>
-  <div>
-    <NuxtLink to="/add">글쓰러가기</NuxtLink>
-    <table style="margin:0 auto">
-      <thead>
-        <tr>
-          <th>idx</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-        </tr>
-      </thead>
-      <tbody v-if="currentPageList && currentPageList.length !== 0">
-        <tr v-for="(post, index) in currentPageList" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>
-            <NuxtLink :to="`post/${post.id}`">{{ post.title }}</NuxtLink>
-          </td>
-          <td>{{ post.author }}</td>
-          <td>{{ post.createdAt }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="board-list">
+    <div class="board-list-content" v-if="currentPageList && currentPageList.length !== 0">
+      <div class="post" v-for="(post, index) in currentPageList" :key="index">
+        <NuxtLink :to="`post/${post.id}`">
+          <p class="title">{{ post.title }}</p>
+        </NuxtLink>
+        <div class="post-info">
+          <div class="author"><span>{{ post.author }}</span></div>
+          <div class="date"><span>{{ post.createdAt }}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-area">
+      <NuxtLink to="/add"><span>글쓰러가기</span></NuxtLink>
+    </div>
     <div> 
       <pagination @setPageList="setPageList" :pagingSetting="setPaging(this.totalCount, this.limit, this.blockSize, this.currentPage)" />
     </div>
@@ -37,8 +31,8 @@ export default {
   },
   data() {
     return {
-      limit: 3,
-      blockSize: 3,
+      limit: 6,
+      blockSize: 4,
       currentPage: 1,
       currentPageList: [],
       totalCount: this.$store.state.data.length,
