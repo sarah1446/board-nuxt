@@ -1,10 +1,11 @@
 <template>
-  <div>
-    {{ updatedPost.author }}
-    <input v-model="updatedPost.title" type="text">
-    <textarea id="" v-model="updatedPost.content" name="" cols="30" rows="10" ></textarea>
-    <button @click="updatePost">저장</button>
-    <button @click="cancelUpdate">취소</button>
+  <div class="update-page">
+    <input v-model="updatedPost.title" type="text" class="title">
+    <textarea id="" v-model="updatedPost.content" name="" cols="30" rows="10" class="content"></textarea>
+    <ul class="btn-box">
+      <li><button @click="cancelUpdate">취소</button></li>
+      <li><button @click="updatePost">저장</button></li>
+    </ul>
   </div>
 </template>
 

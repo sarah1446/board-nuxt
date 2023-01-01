@@ -1,0 +1,19 @@
+.add-page {
+  @apply 
+  h-[600px] p-[15px];
+
+  .title {
+    @apply
+    w-full h-[40px] mb-[15px] px-[15px] border border-solid border-black;
+  }
+
+  .content {
+    @apply
+    w-full h-[450px] mb-[15px] p-[15px] border border-solid border-black;
+  }
+
+  .btn-box {
+    @apply
+    flex justify-between;
+  }
+}

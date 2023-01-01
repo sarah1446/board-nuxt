@@ -1,0 +1,38 @@
+.detail-view {
+  @apply 
+  h-[550px] overflow-y-scroll;
+
+  .content-container {
+    @apply
+    p-[15px];
+
+    .title {
+      @apply
+      text-xl	font-bold mb-[10px];
+    }
+  
+    .info {
+      @apply
+      flex justify-between border-b border-solid border-black pb-[5px] mb-[10px];
+    }
+  
+    .content {
+      @apply 
+      leading-6 mb-[20px];
+    }
+  
+    .options {
+      @apply 
+      flex justify-end;
+  
+      button {
+        @apply
+        ml-[7px];
+      }
+    }
+  }
+
+  .comment-container {
+    
+  }
+}

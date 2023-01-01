@@ -6,11 +6,11 @@
 
   .board-list-content {
     @apply 
-    h-[450px] overflow-y-scroll;
+    h-[450px] pt-[15px] overflow-y-scroll;
 
     .post {
       @apply
-      border-b border-solid border-black h-[70px] p-[10px];
+      border-b border-solid border-black h-[80px] p-[15px];
 
       .title {
         @apply
@@ -27,7 +27,7 @@
 
   .button-area {
     @apply 
-    h-[60px] py-[10px] text-center;
+    py-[20px] text-center;
 
     span {
       @apply

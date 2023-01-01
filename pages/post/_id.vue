@@ -1,15 +1,26 @@
 <template>
-  <div>
-    제목: {{ post && post.title }} <br/>
-    작성자: {{ post && post.author }} <br/>
-    작성일: {{ post && post.createdAt }} <br/>
-    내용: {{ post && post.content }} <br/>
-    <button @click="onClickModifyButton">수정</button>
-    <button @click="onClickDeleteButton">삭제</button>
-    
-    <div>
+  <div class="detail-view">
+    <div class="content-container">
+      <div class="title">
+        <p>
+          {{ post && post.title }} <br/>
+        </p>
+      </div>
+      <ul class="info">
+        <li class="date">{{ post && post.createdAt }}</li>
+        <li class="author">{{ post && post.author }}</li>
+      </ul>
+      <div class="content">
+        {{ post && post.content }}
+      </div>
+      <div class="options">
+        <button @click="onClickModifyButton">수정</button>
+        <button @click="onClickDeleteButton">삭제</button>
+      </div>
+    </div>
+    <div class="comment-container">
       <ul>
-        <li v-for="(comment, index) in post.comments" :key="index" style="border: 1px solid black" @click=setParentCommentId(comment)>
+        <li v-for="(comment, index) in post.comments" :key="index" @click=setParentCommentId(comment)>
           작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
           내용: {{ comment.content }} <br/>
           <button @click="openCommentGuide(comment)">대댓글</button>

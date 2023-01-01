@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <input v-model="title" type="text">
-    <textarea id="" v-model="content" name="" cols="30" rows="10"></textarea>
-    <button @click="savePost">저장</button>
-    <NuxtLink to="/">리스트로 가기</NuxtLink>
+  <div class="add-page">
+    <input v-model="title" type="text" class="title" placeholder="제목을 입력해주세요.">
+    <textarea id="" v-model="content" name="" cols="30" rows="10" class="content"></textarea>
+    <ul class="btn-box">
+      <li><NuxtLink to="/">취소</NuxtLink></li>
+      <li><button @click="savePost" class="save-btn">저장</button></li>
+    </ul>
   </div>
 </template>
 <script>

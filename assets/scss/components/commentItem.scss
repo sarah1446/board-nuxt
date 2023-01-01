@@ -1,5 +1,9 @@
 .comment-item {
   @apply
-  bg-emerald-100 
+  bg-neutral-200;
 
+  .comment {
+    @apply
+    border border-black border-solid;
+  }
 }

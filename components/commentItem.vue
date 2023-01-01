@@ -1,9 +1,9 @@
 <template>
   <div class="comment-item">
     <div v-if="isVisible">
-      <div v-for="(item, idx) in replies" :key="idx">
-        작성자: {{ item.author }} <br/>
-        내용: {{ item.content }} <br/> / id => {{ item.id }}
+      <div v-for="(item, idx) in replies" :key="idx" class="comment">
+        <span>{{ item.author }}</span> <br/>
+        <p>{{ item.content }}</p>
         <button @click="() => openCommentInput(item)">대댓글</button>
         <CommentItem :replies="item.replies" />
       </div>
