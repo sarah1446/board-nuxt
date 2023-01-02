@@ -1,9 +1,4 @@
 .comment-item {
   @apply
-  bg-neutral-200;
-
-  .comment {
-    @apply
-    border border-black border-solid;
-  }
+  bg-neutral-200 p-[10px] pb-0;
 }

@@ -21,15 +21,15 @@
     <div class="comment-container">
       <ul>
         <li v-for="(comment, index) in post.comments" :key="index" @click=setParentCommentId(comment)>
-          작성자: {{ comment.author }} <br/> / id => {{ comment.id}}
-          내용: {{ comment.content }} <br/>
+          {{ comment.author }} <br/>
+          {{ comment.content }} <br/>
           <button @click="openCommentGuide(comment)">대댓글</button>
-          <CommentItem :replies="comment.replies" />
+          <CommentItem v-if="comment.replies.length" :replies="comment.replies" />
         </li>
       </ul>
     </div>
 
-    <div>
+    <div class="comment-input-area">
       <CommentInput :parentCommentId="parentCommentId" />
     </div>
   </div>

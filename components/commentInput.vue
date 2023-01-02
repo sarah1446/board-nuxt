@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <input v-model="content" type="text" name="" id="">
-    <button @click="saveComment">댓글 저장</button>
-    <div v-if="targetCommentId" style="border: 1px solid black;">
-      "{{ this.commentAuthor }}"님에게 댓글달기
+  <div class="comment-input">
+    <div v-if="targetCommentId" class="target-box">
+      <span>"{{ this.commentAuthor }}"님에게 댓글달기</span>
       <button @click="cancelRecomment">대댓글 취소</button>
     </div>
+    <input v-model="content" type="text" name="" id="" ref="target">
+    <button @click="saveComment">저장</button>
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
     }),
   },
   mounted() {
+    this.$refs.target.focus();
   },
   methods: {
     saveComment() {
@@ -59,6 +60,8 @@ export default {
         comment: commentInfo,
         targetCommentId: this.originalCommentInfo.id ?? null,
       })
+
+      this.$refs.target.value = '';
     },
     cancelRecomment() {
       // 대댓글 취소, store값 변경

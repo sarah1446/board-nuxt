@@ -1,0 +1,11 @@
+.comment-input {
+  .target-box {
+    @apply
+    flex justify-between text-slate-400 mb-[5px];
+  }
+
+  input {
+    @apply
+    border border-solid border-black h-[35px] w-[290px] mr-[15px];
+  }
+}
